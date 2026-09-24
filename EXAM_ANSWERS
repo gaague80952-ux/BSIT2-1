@@ -1,0 +1,14 @@
+Question 1: Why is the list in RideManager typed ArrayList<Ride> and not ArrayList<Jeepney>?
+
+Your answer: ArrayList<Ride> is used because the manager needs to store Jeepneys, Tricycles, and Taxis in one list.
+Jeepney, Tricycle, and Taxi all extend Ride, so an object of any of them "is a" Ride and can be added to that list.
+An ArrayList<Jeepney> would only accept Jeepney objects, so the other two vehicles could not be stored.
+Using the parent type also allows polymorphism: when the manager loops through the list and calls a method like printTicket() or computeFare(), each object runs its own version.
+This keeps the code short and flexible.
+
+Question 2: In showStudentDiscounts(), why must you check instanceof before the cast?
+
+Your answer: The elements in the list are typed as Ride, so the compiler does not know which subclass each one really is.
+To use something that belongs only to a subclass, I have to downcast, and a downcast is only safe if the object really is that type.
+If I cast a Taxi to a Jeepney, for example, the program crashes with a ClassCastException. Checking instanceof first asks "is this object really a Jeepney (or Tricycle, etc.)?", and the cast runs only when the answer is yes.
+This prevents runtime errors and picks out only the rides that qualify for the discount.
